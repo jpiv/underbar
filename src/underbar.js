@@ -416,5 +416,28 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var alreadyInvoked = false;
+    var timeWaited = 0;
+    var timerId;
+
+    setInterval(function ()
+      {
+        timeWaited += 1;
+      }, 1);
+
+    return function ()
+    {
+      if(!alreadyInvoked)
+      {
+        alreadyInvoked = true;
+        func.apply(this, arguments);
+      }
+      else if (timeWaited >= wait)
+      {
+        alreadyInvoked = true;
+        timeWaited = 0;
+        func.apply(this, arguments);
+      }
+    }
   };
 }());
