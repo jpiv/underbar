@@ -434,7 +434,6 @@
       }
       else if (timeWaited >= wait)
       {
-        alreadyInvoked = true;
         timeWaited = 0;
         func.apply(this, arguments);
       }
